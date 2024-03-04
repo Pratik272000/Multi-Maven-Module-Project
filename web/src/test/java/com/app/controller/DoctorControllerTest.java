@@ -12,6 +12,7 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MockMvcBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -21,6 +22,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
@@ -52,6 +54,21 @@ class DoctorControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.length()").value(list.size()))
                 .andExpect(MockMvcResultMatchers.jsonPath("$[0].id").value(list.get(0).getId()));
 
+    }
+    @Test
+    public void getDoctorByIdTest() throws Exception{
+        Doctor doc=new Doctor(1,"Shubham","Cardiac");
+        when(doctorService.getDoctorById(1)).thenReturn(Optional.of(doc));
+        mockMvc.perform(MockMvcRequestBuilders.get("/doctor/1")).andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.id").value(doc.getId()))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.name").value(doc.getName()))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.specialist").value(doc.getSpecialist()));
+    }
+    @Test
+    public void getDoctorById_failure_Test() throws Exception{
+        when(doctorService.getDoctorById(999)).thenReturn(Optional.empty());
+        mockMvc.perform(MockMvcRequestBuilders.get("/doctor/{id}",999)
+        ).andExpect(MockMvcResultMatchers.status().isNotFound());
     }
 
 

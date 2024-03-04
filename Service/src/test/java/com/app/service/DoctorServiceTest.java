@@ -13,6 +13,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.verify;
@@ -50,6 +51,24 @@ class DoctorServiceTest {
         assertNotNull(emptyResult);
         assertTrue(emptyResult.isEmpty());
     }
+
+    @Test
+    public void getDoctorByIdTest(){
+        Doctor d=new Doctor(1,"Shubham","Cardiac");
+        when(doctorRepositiry.findById(1)).thenReturn(Optional.of(d));
+        Optional<Doctor> result=doctorService.getDoctorById(1);
+        assertNotNull(result);
+        assertEquals(d.getName(),result.get().getName());
+        assertEquals(d.getSpecialist(),result.get().getSpecialist());
+
+    }
+    @Test
+    public void getDoctorById_failureTest(){
+        when(doctorRepositiry.findById(999)).thenReturn(Optional.empty());
+        Optional<Doctor> result=doctorService.getDoctorById(999);
+        assertTrue(result.isEmpty());
+    }
+
 
 
 }
