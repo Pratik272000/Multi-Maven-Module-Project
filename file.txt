@@ -1,0 +1,1 @@
+This is Hospital-management-System project by using multi maven module springboot .
