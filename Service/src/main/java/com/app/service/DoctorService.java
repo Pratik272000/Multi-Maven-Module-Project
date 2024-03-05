@@ -29,6 +29,9 @@ public class DoctorService {
         return doctorRepositiry.findById(id);
     }
 
+    public Doctor addDocto(Doctor doctor){
+        return doctorRepositiry.save(doctor);
+    }
 
 
 }

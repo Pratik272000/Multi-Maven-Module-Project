@@ -2,6 +2,7 @@ package com.app.service;
 
 import com.app.dao.PatientRepository;
 import com.app.dtos.PatientDetailsDto;
+import com.app.dtos.PatientDto;
 import com.app.entities.Patient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,6 +39,12 @@ public class PatientService {
             return Optional.of(patientToPatientDetailsDtoConvertor(patient.get()));
         }else return Optional.empty();
     }
+
+    public PatientDto addPatient(PatientDto patientDto){
+        Patient result=patientRepository.save(new Patient(patientDto.getName(),patientDto.getGender(),patientDto.getBloodGroup(),patientDto.getAge(),patientDto.getContact()));
+        return patientDto;
+    }
+
 
 
 }

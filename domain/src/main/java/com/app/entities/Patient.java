@@ -22,4 +22,12 @@ public class Patient {
     String contact;
     @OneToOne(cascade = CascadeType.ALL)
     Address address;
+
+    public Patient(String name, String gender, String bloodGroup, int age, String contact) {
+        this.name = name;
+        this.gender = gender;
+        this.bloodGroup = bloodGroup;
+        this.age = age;
+        this.contact = contact;
+    }
 }

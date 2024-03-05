@@ -2,12 +2,11 @@ package com.app.controller;
 
 import com.app.entities.Doctor;
 import com.app.service.DoctorService;
+import jakarta.annotation.PostConstruct;
 import jakarta.persistence.GeneratedValue;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.print.Doc;
 import java.util.List;
@@ -28,6 +27,11 @@ public class DoctorController {
             return ResponseEntity.notFound().build(); // This should return a 404 status
         }
         return ResponseEntity.ok(optionalDoctor.get());
+    }
+
+    @PostMapping("/add")
+    public ResponseEntity addDoctor(@RequestBody Doctor doctor){
+        return ResponseEntity.ok(doctorService.addDocto(doctor));
     }
 
 }
