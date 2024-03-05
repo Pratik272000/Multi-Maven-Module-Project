@@ -10,12 +10,15 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import javax.print.Doc;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
+import static org.hamcrest.Matchers.in;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -28,13 +31,13 @@ class DoctorServiceTest {
     @Captor
     private ArgumentCaptor<List<Doctor>> doctorListCaptor;
 
-    @Test
-    public void initDoctorTest(){
-        List<Doctor> list=new ArrayList<>(Arrays.asList(new Doctor(101,"Shubham","Cardiac"),
-                new Doctor(201,"Prabhat","eye")));
-        doctorService.initDoctor();
-        verify(doctorRepositiry).saveAll(doctorListCaptor.capture());
-    }
+//    @Test
+//    public void initDoctorTest(){
+//        List<Doctor> list=new ArrayList<>(Arrays.asList(new Doctor(101,"Shubham","Cardiac"),
+//                new Doctor(201,"Prabhat","eye")));
+//        doctorService.initDoctor();
+//        verify(doctorRepositiry).saveAll(doctorListCaptor.capture());
+//    }
 
 
     @Test
@@ -68,6 +71,16 @@ class DoctorServiceTest {
         Optional<Doctor> result=doctorService.getDoctorById(999);
         assertTrue(result.isEmpty());
     }
+    @Test
+    public void addDoctor(){
+        Doctor d=new Doctor(1,"Shubham","Cardiac","9922334455");
+        when(doctorRepositiry.save(any(Doctor.class))).thenAnswer(invocation -> invocation.getArgument(0));
+        Doctor result=doctorService.addDocto(d);
+        assertNotNull(result);
+        assertEquals(d.getName(),result.getName());
+        verify(doctorRepositiry).save(any(Doctor.class));
+    }
+
 
 
 

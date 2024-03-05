@@ -30,4 +30,13 @@ public class Patient {
         this.age = age;
         this.contact = contact;
     }
+
+    public Patient(int id, String name, String gender, String bloodGroup, int age, String contact) {
+        this.id = id;
+        this.name = name;
+        this.gender = gender;
+        this.bloodGroup = bloodGroup;
+        this.age = age;
+        this.contact = contact;
+    }
 }

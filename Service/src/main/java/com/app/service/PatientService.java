@@ -25,7 +25,7 @@ public class PatientService {
         return result;
     }
 
-    private PatientDetailsDto patientToPatientDetailsDtoConvertor(Patient p) {
+    public PatientDetailsDto patientToPatientDetailsDtoConvertor(Patient p) {
         return new PatientDetailsDto(p.getName(),p.getGender(),
                 p.getBloodGroup(),p.getAge(),p.getContact(),p.getAddress().getCity()
                 ,p.getAddress().getLane(),p.getAddress().getPincode());
