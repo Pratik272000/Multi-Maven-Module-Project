@@ -8,24 +8,17 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.context.annotation.EnableMBeanExport;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Doctor {
+public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
-    String name;
-    String specialist;
-    String contact;
-
-    public Doctor(int id, String name, String specialist) {
-        this.id = id;
-        this.name = name;
-        this.specialist = specialist;
-    }
+    String city;
+    String lane;
+    String pincode;
 }

@@ -15,11 +15,11 @@ import java.util.stream.Stream;
 public class DoctorService {
     @Autowired
     private DoctorRepositiry doctorRepositiry;
-    @PostConstruct
-    public void initDoctor(){
-        doctorRepositiry.saveAll(Stream.of(new Doctor(101,"Shubham","Cardiac"),
-                new Doctor(201,"Prabhat","eye")).collect(Collectors.toList()));
-    }
+//    @PostConstruct
+//    public void initDoctor(){
+//        doctorRepositiry.saveAll(Stream.of(new Doctor(101,"Shubham","Cardiac"),
+//                new Doctor(201,"Prabhat","eye")).collect(Collectors.toList()));
+//    }
 
     public List<Doctor> getDoctr(){
         return doctorRepositiry.findAll();

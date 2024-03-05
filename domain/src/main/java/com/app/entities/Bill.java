@@ -6,20 +6,23 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.math.BigDecimal;
+
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Patient {
+public class Bill {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int id;
-    String name;
-    String gender;
-    String bloodGroup;
-    int age;
-    String contact;
-    @OneToOne(cascade = CascadeType.ALL)
-    Address address;
+    private Long id;
+
+    @ManyToOne
+    @JoinColumn(name = "patient_id")
+    private Patient patient;
+
+    private BigDecimal amount;
+    private boolean paid;
+
 }
