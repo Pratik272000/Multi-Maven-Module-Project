@@ -18,12 +18,12 @@ public class AddressService {
     AddressRepository addressRepository;
     public Optional<Address> addPatientAddress(int id, Address address){
         Optional<Patient> p=patientRepository.findById(id);
-        if(p.isEmpty())
+        if(!p.isPresent())
             return Optional.empty();
         addressRepository.save(address);
         p.get().setAddress(address);
         patientRepository.save(p.get());
-        return Optional.ofNullable(address);
+        return Optional.of(address);
     }
 
 }

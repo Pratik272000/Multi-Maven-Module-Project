@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @RestController
 @RequestMapping("/address")
 public class AddressController {
@@ -14,6 +16,7 @@ public class AddressController {
     AddressService addressService;
     @PostMapping("/add/{id}")
     public ResponseEntity addPatientAddress(@PathVariable int id, @RequestBody Address address){
+
         return ResponseEntity.ok(addressService.addPatientAddress(id,address));
     }
 }
