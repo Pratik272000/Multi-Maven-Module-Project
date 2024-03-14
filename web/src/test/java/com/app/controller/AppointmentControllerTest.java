@@ -69,7 +69,6 @@ class AppointmentControllerTest {
 
     }
 
-
     @Test
     void deleteAppointment()throws Exception {
         AppointmentDto a1=new AppointmentDto("Shubham","Omkar",LocalDateTime.of(2024,3,8,1,20));
