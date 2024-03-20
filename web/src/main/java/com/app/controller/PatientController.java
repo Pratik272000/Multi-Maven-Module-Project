@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/patient")
+@CrossOrigin("*")
 public class PatientController {
 @Autowired
     PatientService patientService;

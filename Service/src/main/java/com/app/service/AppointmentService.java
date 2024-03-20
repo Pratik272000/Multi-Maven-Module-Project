@@ -25,7 +25,9 @@ public class AppointmentService {
     PatientRepository patientRepository;
 
     public AppointmentDto doAppointment(TakeAppointmentDto takeAppointmentDto){
+        System.out.println("in do appointment service method");
         Appointment appointment=new Appointment();
+        System.out.println(takeAppointmentDto.getDoctorId());
         Optional<Doctor> doctor=doctorRepositiry.findById(takeAppointmentDto.getDoctorId());
         Optional<Patient> patient=patientRepository.findById(takeAppointmentDto.getPatientId());
         appointment.setDoctor(doctor.get());

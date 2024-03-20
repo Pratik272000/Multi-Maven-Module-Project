@@ -17,9 +17,11 @@ public class HomeService {
     }
     public Optional<Object> login(LoginDto loginDto){
         AccessData a=homeRepository.findByEmail(loginDto.getEmail());
+        System.out.println("in login service");
+        if(a!=null)
         if(a.getPassword().equals(loginDto.getPassword()))
             return Optional.of(a);
-        else return Optional.empty();
+         return Optional.empty();
     }
 
 }

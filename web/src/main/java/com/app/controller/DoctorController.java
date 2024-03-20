@@ -13,14 +13,17 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
+@RequestMapping("/doctor")
+@CrossOrigin("*")
+
 public class DoctorController {
     @Autowired
     private DoctorService doctorService;
-    @GetMapping("/doctors")
+    @GetMapping("/all")
     public List<Doctor> getDoctor(){
         return doctorService.getDoctr();
     }
-    @GetMapping("/doctor/{id}")
+    @GetMapping("/doc/{id}")
     public ResponseEntity getDoctorById(@PathVariable int id){
         Optional<Doctor> optionalDoctor = doctorService.getDoctorById(id);
         if (optionalDoctor.isEmpty()) {
