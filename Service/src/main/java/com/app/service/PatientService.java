@@ -3,6 +3,7 @@ package com.app.service;
 import com.app.dao.PatientRepository;
 import com.app.dtos.PatientDetailsDto;
 import com.app.dtos.PatientDto;
+import com.app.entities.Address;
 import com.app.entities.Patient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,9 +27,25 @@ public class PatientService {
     }
 
     public PatientDetailsDto patientToPatientDetailsDtoConvertor(Patient p) {
-        return new PatientDetailsDto(p.getName(),p.getGender(),
-                p.getBloodGroup(),p.getAge(),p.getContact(),p.getAddress().getCity()
-                ,p.getAddress().getLane(),p.getAddress().getPincode());
+        PatientDetailsDto pd= new PatientDetailsDto(p.getName(),p.getGender(),
+                p.getBloodGroup(),p.getAge(),p.getContact());
+        if(p.getAddress()==null){
+            p.setAddress(new Address(1,"-","-","-"));
+        }
+        if(p.getAddress().getCity()!=null)
+            pd.setCity(p.getAddress().getCity());
+        else
+            pd.setCity("-");
+        if(p.getAddress().getPincode()!=null)
+            pd.setPincode(p.getAddress().getPincode());
+        else
+            pd.setPincode("-");
+        if(p.getAddress().getLane()!=null)
+            pd.setLane(p.getAddress().getLane());
+        else
+            pd.setLane("-");
+       return pd;
+
     }
 
 

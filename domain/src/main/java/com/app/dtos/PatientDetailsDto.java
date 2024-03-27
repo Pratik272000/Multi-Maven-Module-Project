@@ -18,4 +18,11 @@ public class PatientDetailsDto {
     String pincode;
 
 
+    public PatientDetailsDto(String name, String gender, String bloodGroup, int age, String contact) {
+        this.name = name;
+        this.gender = gender;
+        this.bloodGroup = bloodGroup;
+        this.age = age;
+        this.contact = contact;
+    }
 }
